@@ -1,0 +1,16 @@
+{
+  "name": "videoinfo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "electron": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.8.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "npm": "^5.7.1"
+  }
+}

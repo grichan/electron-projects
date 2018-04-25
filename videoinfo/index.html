@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <h1>Video Length</h1>
+
+  <form>
+    <div>
+      <label for="v">Selecto video</label>
+      <input type="file" name="" id="v" accept="video/*">
+    </div>
+    <button type="submit">Get info</button>
+  </form>
+
+  <h1 id="result"></h1>
+
+<script>
+  const electron = require('electron');
+  const { ipcRenderer } = electron;  // inter process communication obj
+
+  document.querySelector('form').addEventListener('submit', (event) =>{
+  event.preventDefault();
+  // destructure path bellow
+  const { path } = document.querySelector('input').files[0];
+
+  ipcRenderer.send('video:submit', path); // send to electron part
+
+});
+
+ipcRenderer.on('video:duration', (event, duration) => {
+  document.querySelector('#result').innerHTML = `Video is ${duration} seconds`;
+});
+</script>
+
+  </body>
+</html>

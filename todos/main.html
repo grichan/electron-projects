@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>My Todos</h1>
+    <ul>
+
+    </ul>
+    <script type="text/javascript">
+      const electron = require('electron'); // referance to electron
+      const { ipcRenderer } = electron; // distructure ipc renderer
+      const list = document.querySelector('ul');
+
+      ipcRenderer.on('todo:add', (event, todo) => {
+        const li = document.createElement('li');
+        const text = document.createTextNode(todo);
+
+        li.appendChild(text);
+        list.appendChild(li);
+      });
+
+      ipcRenderer.on('todo:clear' , () => {
+        list.innerHTML = "";
+      });
+
+    </script>
+  </body>
+</html>
